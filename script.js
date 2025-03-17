@@ -1,36 +1,86 @@
-// for ([initialExpression]; [conditionExpression]; [incrementExpression])
-//   statement;
+const form = document.querySelector("form");
+const todoInput = document.querySelector("#todo-input");
+const addButton = document.querySelector("#add-button");
+const todoList = document.querySelector("#todo-list");
 
-// INITITAL EXPRESSION - Initializes a variable/counter
-// CONDITION EXPRESSION - Condition that the loop will continue to run as long as it is met or until the condition is false
-// INCREMENT EXPRESSION - Expression that will be executed after each iteration of the loop. Usually increments the variable
-// STATEMENT - Code that will be executed each time the loop is run. To execute a `block` of code, use the `{}` syntax
+let todos = [];
 
-// for (let i = 0; i <= 10; i++) {
-//   if (i === 7) {
-//     console.log('7 is my lucky number');
-//   } else {
-//     console.log('Number ' + i);
-//   }
-// }
+function addTodo() {
+  const todoText = todoInput.value.trim();
+  
+  // ตรวจสอบความยาวของข้อความ
+  if (todoText.length > 50) {
+    alert("Task must be less than 50 characters.");
+    return;
+  }
 
-// Nested loops
-// for (let i = 1; i <= 10; i++) {
-//   console.log('Number ' + i);
+  if (todoText.length > 0) {
+    const todo = {
+      id: Date.now(),
+      text: todoText,
+      completed: false,
+    };
 
-//   for (let j = 1; j <= 5; j++) {
-//     console.log(`${i} * ${j} = ${i * j}`);
-//   }
-// }
-
-// Loop through an array
-const names = ['Brad', 'Sam', 'Sara', 'John', 'Tim'];
-console.log(names);
-
-for (let i = 0; i < names.length; i++) {
-  if (names[i] === 'John') {
-    console.log(names[i] + ' is the best');
-  } else {
-    console.log(names[i]);
+    todos.push(todo);
+    todoInput.value = "";
+    renderTodos();
   }
 }
+
+function deleteTodo(id) {
+  // แสดง confirm box ก่อนลบ
+  const confirmation = confirm("Are you sure you want to delete this task?");
+  if (confirmation) {
+    todos = todos.filter((todo) => todo.id !== id);
+    renderTodos();
+  }
+}
+
+function toggleCompleted(id) {
+  todos = todos.map((todo) => {
+    if (todo.id === id) {
+      todo.completed = !todo.completed;
+    }
+    return todo;
+  });
+  renderTodos();
+}
+
+function renderTodos() {
+  todoList.innerHTML = "";
+
+  todos.forEach((todo) => {
+    const todoItem = document.createElement("li");
+    const todoText = document.createElement("span");
+    const todoDeleteButton = document.createElement("button");
+    const myCheck = document.createElement("input");
+
+    myCheck.setAttribute("type", "checkbox");
+
+    todoText.textContent = todo.text;
+    todoDeleteButton.textContent = "Delete";
+
+    // ฟังก์ชันเช็คการทำงานเสร็จ
+    if (todo.completed) {
+      todoText.style.textDecoration = "line-through";
+      myCheck.checked = true;
+    }
+
+    todoDeleteButton.addEventListener("click", () => deleteTodo(todo.id));
+
+    todoItem.appendChild(myCheck);
+    todoItem.appendChild(todoText);
+    todoItem.appendChild(todoDeleteButton);
+
+    myCheck.addEventListener("click", () => toggleCompleted(todo.id));
+
+    todoList.appendChild(todoItem);
+  });
+}
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  addTodo();
+});
+
+renderTodos();
