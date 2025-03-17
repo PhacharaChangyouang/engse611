@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAB7 - JavaScript DOM Challenges</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; 
+        }
+        .header {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+        .header-left img {
+            max-width: 150px;
+            margin-right: 20px;
+        }
+        .header-right {
+            text-align: right;
+        }
+        .student-info div {
+            margin-bottom: 5px;
+        }
+        .exercise-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .exercise-table th, .exercise-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        .show-button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        #animateMe {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: relative;
+            transition: width 2s, height 2s, background-color 2s, left 2s;
+        }
+        .new-class {
+            color: red;
+            font-weight: bold;
+        }
+        #dataContainer p, #fetchedData p {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        #click-new-tab {
+            margin-top: 20px;
+        }
+        #popup-image-button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-left">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmwj_DiA1qb7QzsrczEb1nS4s_W9lSn71aGA&s" alt="LAB7 Image">
+            <div>
+                <h2>LAB7</h2>
+                <h3>JavaScript DOM Challenges</h3>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmwj_DiA1qb7QzsrczEb1nS4s_W9lSn71aGA&s" alt="LAB7 Image">
+                <div>👤 Name Surname</div>
+                <div>🆔 Student ID</div>
+                <div>● Sec</div>
+                <div>● Subject</div>
+                <button id="popup-image-button" onclick="popupImage()">Click to pop-up big image</button>
+            </div>
+        </div>
+    </div>
+
+    <table class="exercise-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Exercise 1: Changing Text Content</td>
+                <td><button class="show-button" onclick="showExercise(1)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Exercise 2: Modifying CSS Styles</td>
+                <td><button class="show-button" onclick="showExercise(2)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Exercise 3: Adding and Removing Classes</td>
+                <td><button class="show-button" onclick="showExercise(3)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Exercise 4: Creating and Appending Elements</td>
+                <td><button class="show-button" onclick="showExercise(4)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Exercise 5: Removing Elements</td>
+                <td><button class="show-button" onclick="showExercise(5)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Exercise 6: Handling Events</td>
+                <td><button class="show-button" onclick="showExercise(6)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Exercise 7: Traversing the DOM</td>
+                <td><button class="show-button" onclick="showExercise(7)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Exercise 8: Manipulating Form Elements</td>
+                <td><button class="show-button" onclick="showExercise(8)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Exercise 9: Fetching and Displaying Data</td>
+                <td><button class="show-button" onclick="showExercise(9)">Show me</button></td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Exercise 10: Animations and Transitions</td>
+                <td><button class="show-button" onclick="showExercise(10)">Show me</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="click-new-tab">
+        <button onclick="openNewTab()">Click to create new tab to view the result</button>
+        <div style="margin-top: 5px; font-size: smaller; color: #f30b0b;">to view the result</div>
+    </div>
+
+    <div id="exercise-area" style="margin-top: 30px;">
+        <h3>Exercise Area</h3>
+        <div id="ex1" style="display: none;">
+            <h2 id="changingText">Original Text</h2>
+        </div>
+        <div id="ex2" style="display: none;">
+            <p id="styledParagraph">This paragraph will be styled.</p>
+        </div>
+        <div id="ex3" style="display: none;">
+            <p id="classParagraph" class="initial">This paragraph will have classes toggled.</p>
+        </div>
+        <div id="ex4" style="display: none;">
+            <div id="appendToMe"></div>
+        </div>
+        <div id="ex5" style="display: none;">
+            <p id="toBeRemoved">This paragraph will be removed.</p>
+        </div>
+        <div id="ex6" style="display: none;">
+            <button id="eventButton">Click Me</button>
+            <p id="eventMessage">No click yet.</p>
+        </div>
+        <div id="ex7" style="display: none;">
+            <div id="parentForTraversal">
+                <p id="targetElement">Target Paragraph</p>
+                <span>A span</span>
+                <p class="sibling">Another Paragraph</p>
+            </div>
+        </div>
+        <div id="ex8" style="display: none;">
+            <form id="inputForm">
+                <input type="text" id="inputText" value="Initial Value">
+                <button type="submit">Submit</button>
+            </form>
+            <p id="formOutput"></p>
+        </div>
+        <div id="ex9" style="display: none;">
+            <div id="fetchedData">
+                <h3>Fetched Data</h3>
+            </div>
+        </div>
+        <div id="ex10" style="display: none;">
+            <div id="animateMe"></div>
+            <button id="animateButton">Animate</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

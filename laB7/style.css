@@ -1,0 +1,62 @@
+body {
+    .logo {
+        max-width: 150px; /* กำหนดความกว้างสูงสุด */
+        height: auto;
+    }
+    font-family: sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align content to the left */
+}
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+}
+.header-left img {
+    max-width: 150px;
+    margin-right: 20px;
+}
+.header-right {
+    margin-left: auto;
+    text-align: right;
+}
+.student-info div {
+    margin-bottom: 5px;
+}
+.exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.exercise-table th, .exercise-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+.show-button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+#animateMe {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    position: relative;
+    transition: width 2s, height 2s, background-color 2s, left 2s; /* Added left transition */
+}
+.new-class {
+    color: red;
+    font-weight: bold;
+}
+#dataContainer p, #fetchedData p {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
