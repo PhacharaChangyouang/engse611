@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylew3.css" />
+    <script src="scriptw3.js" defer></script>
+    <title>Do forms</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact</h1>
+        <form action="url-to-formmail-provided-by-your-ISP" method="post"></form>
+         
+
+            <form action="/process_form" method="post">
+                <label for="username">Name Surname:</label>
+                <input type="text" id="username" name="username"><br><br>
+                <label for="username">Email:</label>
+                <input type="text" id="email" name="email" required><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"><br><br>
+                <label for="phone number">Phone number:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+                <input type="submit" value="login"><br><br>
+                <input type="reset" value="reset"><br><br>
+              </form>
+           
+              <form>
+                <br><select name="Icecream Flavours"><br><br>
+                    <option value="More infomation">More infomation</option>
+                    <option value="Contact a office" selected>Contact a office</option>
+                    <option value="Call">Call</option>
+                    <option value="More">More</option>
+                </select>
+             </form>
+             
+             <br><label for="message">Message:</label>
+             <textarea id="More infomation" name="message" rows="4" cols="50" placeholder="textarea"></textarea>
+        
+        
+        
+        
+        
+            </form>
+        </form>
+        <ul id="todo-list"></ul>
+    </div>
+</body>
+</html>
